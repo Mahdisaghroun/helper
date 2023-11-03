@@ -1,10 +1,12 @@
 
+
+
 .calendar .br {
     border-bottom: 1px solid #242d33;
 }
 .calendar .card:hover{
     background-color: yellow;
-    color: black;
+    color: white;
 }
 .calendar .card {
     background-color: transparent;
@@ -287,4 +289,11 @@ ul {
 
 .slick-arrow{
     width: 6rem !important;
+}
+ th {
+    color:white
+}
+
+td {
+    color:white
 }

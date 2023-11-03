@@ -140,11 +140,11 @@ class Dazn extends Component {
        Platform: "ios",
      }); */
     let data = JSON.stringify({
-      "Email": "edelen.romania@gmail.com",
-      "Password": "kGC&5wN:kL",
+      "Email": "onlinealways@tutamail.com",
+      "Password": "EasyPassword23@",
       "Platform": "web",
-      "DeviceId": "0076d6da13",
-      "ProfilingSessionId": "03stsw3frx7rdigfljl2fjf"
+      "DeviceId": "005cc6abf3",
+      "ProfilingSessionId": "we6cds1935wvevtmzonel"
     });
     let config = {
       method: 'post',
@@ -252,13 +252,15 @@ class Dazn extends Component {
                 var config = {
                   method: 'post',
                   maxBodyLength: Infinity,
-                  url: 'http://185.221.173.62:4120/excute',
+                  url: '1',
                   headers: {
                     'Content-Type': 'application/json'
                   },
                   data: data
                 };
-                await Axios(config)
+                await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                  curl: config
+                })
                   .then(async function (response) {
                     let token = localStorage.getItem('accessTokenIt')
 
@@ -272,13 +274,15 @@ class Dazn extends Component {
                     var config = {
                       method: 'post',
                       maxBodyLength: Infinity,
-                      url: 'http://185.221.173.62:5111/getkey',
+                      url: '2',
                       headers: {
                         'Content-Type': 'application/json'
                       },
                       data: data
                     };
-                    await Axios(config)
+                    await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                curl: config
+              })
                       .then(function (response) {
                         let parseddata = response.data
                         let key = parseddata.key
@@ -368,13 +372,15 @@ class Dazn extends Component {
       var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://185.221.173.62:4120/excute',
+        url: '1',
         headers: {
           'Content-Type': 'application/json'
         },
         data: data
       };
-      await Promise.all(await Axios(config)
+      await Promise.all( await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+        curl: config
+      })
         .then(async function (response) {
           let token = localStorage.getItem('accessTokenIt')
           let p = response.data.pssh.replace('PSSH ', '')
@@ -387,13 +393,15 @@ class Dazn extends Component {
           var config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'http://185.221.173.62:5111/getkey',
+            url: '2',
             headers: {
               'Content-Type': 'application/json'
             },
             data: data
           };
-          await Axios(config)
+            await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+            curl: config
+          })
             .then(function (response) {
               let parseddata = response.data
               let key = parseddata.key
@@ -441,7 +449,7 @@ class Dazn extends Component {
         channels.map(async (el, i) => {
           try {
             let token = localStorage.getItem('accessTokenIt')
-            let response = await this.getById(el.AssetId).catch(err => console.log('not found', err, el.Title,el.AssetId));
+            let response = await this.getById(el.AssetId).catch(err => console.log('not found', err, el.Title, el.AssetId));
             channels[i].urls = response.data.PlaybackDetails;
             console.log("hahahahahah", response.data.PlaybackDetails)
             let d1 = response.data.PlaybackDetails[0].ManifestUrl
@@ -458,14 +466,16 @@ class Dazn extends Component {
             var config = {
               method: 'post',
               maxBodyLength: Infinity,
-              url: 'http://185.221.173.62:4120/excute',
+              url: '1',
               headers: {
                 'Content-Type': 'application/json'
               },
               data: data
             };
             await Promise.all(
-              await Axios(config)
+              await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                curl: config
+              })
                 .then(async function (response) {
                   let p = response.data.pssh.replace('PSSH ', '')
                   console.log("Strem v" + i, p)
@@ -478,13 +488,15 @@ class Dazn extends Component {
                   var config = {
                     method: 'post',
                     maxBodyLength: Infinity,
-                    url: 'http://185.221.173.62:5111/getkey',
+                    url: '2',
                     headers: {
                       'Content-Type': 'application/json'
                     },
                     data: data
                   };
-                  await Axios(config)
+                    await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                    curl: config
+                  })
                     .then(function (response) {
                       let parseddata = response.data
                       let key = parseddata.key
@@ -654,7 +666,7 @@ class Dazn extends Component {
             <td>{itemData.Description}</td>
             <td>{itemData.Type}</td>
             <td>{itemData.Label}</td>
-            <td>
+            {/* <td>
               {itemData?.urls?.length > 0 && (
                 <button
                   style={{ backgroundColor: "red" }}
@@ -682,9 +694,9 @@ class Dazn extends Component {
                   <i class="fa fa-copy"></i>
                 </button>
               )}
-            </td>
-            <td>{moment(itemData.Start).format("YY-MM-DD HH:MM")}</td>
-            <td>{moment(itemData.End).format("YY-MM-DD HH:MM")}</td>
+            </td> */}
+            <td>{moment(itemData.Start).format("HH:MM")}</td>
+            <td>{moment(itemData.End).format("HH:MM")}</td>
             <td>
               {itemData?.urls?.length > 0 && (
                 <button
@@ -727,18 +739,7 @@ class Dazn extends Component {
                 </button>
               )}
             </td>
-            <td>
 
-              <button
-                className="btn btn-secondary btn-sm mr-1"
-                onClick={() =>
-                  this.generateKey(index)
-                }
-              >
-                <i class="fa fa-key"></i>
-              </button>
-
-            </td>
           </tr>
         );
       });
@@ -751,13 +752,13 @@ class Dazn extends Component {
               <th scope="col">Description</th>
               <th scope="col">Type</th>
               <th scope="col">Label</th>
-              <th scope="col" style={{ color: "red" }}>PSSH</th>
-              <th scope="col" style={{ color: "blue" }}>LICENCE</th>
+              {/*  <th scope="col" style={{ color: "red" }}>PSSH</th>
+              <th scope="col" style={{ color: "blue" }}>LICENCE</th> */}
               <th scope="col">Start</th>
               <th scope="col">End</th>
-              <th scope="col">value 1</th>
-              <th scope="col">value 2</th>
-              <th scope="col">value 3</th>
+              <th scope="col">LINK 1</th>
+              <th scope="col">LINK 2</th>
+              <th scope="col">LINK 3</th>
             </tr>
           </thead>
           <tbody>{studentsTable}</tbody>
@@ -787,23 +788,13 @@ class Dazn extends Component {
         { }
         <div className="text-center mt-3">
           <div className="btn-group" role="group">
-            <button
-              type="button"
-              className={
-                this.state.tabId == "LIVE_KEY"
-                  ? "btn btn-dark"
-                  : "btn btn-outline-dark"
-              }
-              onClick={() => this.setState({ tabId: "LIVE_KEY" })}
-            >
-              LIVE KEY
-            </button>
+
             <button
               type="button"
               className={
                 this.state.tabId == "LIVE"
-                  ? "btn btn-dark"
-                  : "btn btn-outline-dark"
+                  ? "btn btn-light"
+                  : "btn btn-outline-light"
               }
               onClick={() => this.setState({ tabId: "LIVE" })}
             >
@@ -813,8 +804,8 @@ class Dazn extends Component {
               type="button"
               className={
                 this.state.tabId == "LINEAR"
-                  ? "btn btn-dark"
-                  : "btn btn-outline-dark"
+                  ? "btn btn-light"
+                  : "btn btn-outline-light"
               }
               onClick={() => this.setState({ tabId: "LINEAR" })}
             >
@@ -824,20 +815,20 @@ class Dazn extends Component {
               type="button"
               className={
                 this.state.tabId == "SCHEDULE"
-                  ? "btn btn-dark"
-                  : "btn btn-outline-dark"
+                  ? "btn btn-light"
+                  : "btn btn-outline-light"
               }
               onClick={() => this.setState({ tabId: "SCHEDULE" })}
             >
               SCHEDULE
             </button>
           </div>
-          {this.props?.isAdmin && <button
+          {/* {this.props?.isAdmin && <button
             className="btn btn-warning float-right"
             onClick={() => this.setState({ loginModalState: true })}
           >
             NEW LOGIN
-          </button>}
+          </button>} */}
         </div>
         <div
           class="input-group container"
@@ -893,6 +884,7 @@ class Dazn extends Component {
                 className="date-scroller__month-title"
                 style={{
                   marginTop: 10,
+                  color: 'white'
                 }}
               >
                 {slickMonth.charAt(0).toUpperCase() + slickMonth.substring(1)}
@@ -921,14 +913,18 @@ class Dazn extends Component {
                               height: 80,
                               backgroundColor:
                                 this.state.selected === index
-                                  ? "#f7ff1a"
+                                  ? "black"
                                   : "transparent",
                             }}
                           >
-                            <span className="date-tile__day-of-the-month">
+                            <span className="date-tile__day-of-the-month" style={{
+                              color: 'white'
+                            }}>
                               {element.date}
                             </span>
-                            <span className="date-tile__day-of-the-week">
+                            <span className="date-tile__day-of-the-week" style={{
+                              color: 'white'
+                            }} >
                               {element.weekDay}
                             </span>
                           </section>
@@ -949,9 +945,10 @@ class Dazn extends Component {
               textAlign: "center",
               margin: 20,
               marginTop: 50,
+              color: 'red'
             }}
           >
-            You are not connected ! Please click on NEW LOGIN{" "}
+            You are not connected ! Please Refresh Your Tab
           </h4>
         )}
         {this.state.loginModalState && (

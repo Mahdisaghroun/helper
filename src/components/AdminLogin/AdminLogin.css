@@ -1,10 +1,11 @@
 .login-title {
     font-size: 50px;
+    color: white;
 }
 
 .admin-login {
     position: absolute;
-    background: url('../../images/admin-login-background.jpg') no-repeat;
+    background: url('https://images.unsplash.com/photo-1666615435088-4865bf5ed3fd?auto=format&fit=crop&q=80&w=2071&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat;
     height: 100%; 
     width: 100%;
     background-position: center;
@@ -17,7 +18,7 @@
     padding-bottom: 25px;
     padding-left: 60px;
     padding-right: 60px;
-    background-color: rgba(10, 102, 102, 0.349);
+    background-color: rgba(0, 0, 0, 0.349);
     -webkit-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
     box-shadow: -1px 9px 40px -12px rgba(0,0,0,0.75);
@@ -25,7 +26,7 @@
 
 
 .button_1 {
-    background-color: #1ab4be;
+    background-color: black;
     display: inline-block;
     padding: 10px 60px;
     margin: 10px;
@@ -34,7 +35,7 @@
     border-radius: 30px;
     color: #fff;
     cursor: pointer;
-    border: 2px solid #33d3df;
+    border: 2px solid red;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }

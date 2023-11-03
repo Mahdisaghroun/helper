@@ -1,8 +1,8 @@
 import React from 'react';
-import SpinnerImg from '../../images/spinner.gif';
+import './Spinner.css';
 
 const Spinner = () => {
-    return <img src={SpinnerImg} style={{ width: '100px', height: '100px' }} alt='Spinner' />;
+    return <div className="spinner">ZEROBUG</div>;
 };
 
 export default Spinner;

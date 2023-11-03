@@ -81,14 +81,8 @@ function App() {
       .then(async function (response) {
         console.log(response.data);
         let staff = response.data.staffs
-        let user = await localStorage.getItem('user')?await JSON.parse(localStorage.getItem('user')):null
-        staff.map(async (el,i)=>{
-          if((el.username===user?.username)&&(el.password===user.password)){
-            console.log(el)
-            console.log('FOUND OK')
-          await  localStorage.setItem("user", JSON.stringify(el));
-          }
-        })
+        let user = "user"
+
         setData(response.data);
         localStorage.setItem(
           "features",
@@ -123,24 +117,15 @@ function App() {
           if (!isAdmin) {
             localStorage.setItem("user", JSON.stringify(response.data.staf));
           }
-         // this.props.loginAdmin(isAdmin);
+          // this.props.loginAdmin(isAdmin);
         }
       }
     }
-    fetching()
-   // login()
+   // fetching()
+    // login()
   }, []);
   useEffect(() => {
-    let c = "http://185.221.173.62:5555";
-
-    let config = localStorage.getItem("config");
-    if (config?.indexOf("{") > -1) {
-      localStorage.removeItem("config");
-      localStorage.setItem("config", c);
-    }
-    if (!config) {
-      localStorage.setItem("config", c);
-    }
+   
   }, []);
   useEffect(() => {
     async function fet() {
@@ -151,10 +136,26 @@ function App() {
   }, []);
   return (
     <div className="App">
-      {data && (
+      {true && (
         <ToastProvider>
           <Route exact path="/" component={AdminLogin} />
           <Switch>
+            <Route
+              exact
+              path={"/daznit"}
+              component={(props) => (
+                <Dazn
+                  nodeLinks={{}}
+                  ip={ipInfo}
+                  {...props}
+                  daznLogin={"x"}
+                  reload={() => {}}
+                ></Dazn>
+              )}
+            />
+          </Switch>
+
+          {/*  <Switch>
             <PrivateRoute
               exact
               path={"/dashboard"}
@@ -313,8 +314,8 @@ function App() {
                 ></UpdateFeature>
               )}
             />
-          </Switch>
-          <Switch>
+          </Switch> */}
+          {/*   <Switch>
             <Route
               exact
               path={"/daznit"}
@@ -358,8 +359,8 @@ function App() {
                 ></DaznEs>
               )}
             />
-          </Switch>
-          {data.features.map((el, i) => (
+          </Switch> */}
+          {/*  {data.features.map((el, i) => (
             <Switch>
               <Route
                 exact
@@ -369,7 +370,7 @@ function App() {
                 )}
               />
             </Switch>
-          ))}
+          ))} */}
         </ToastProvider>
       )}
     </div>

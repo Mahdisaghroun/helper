@@ -16,8 +16,8 @@ class AdminLogin extends Component {
     }
 
     componentDidMount() {
-        if(this.props.admin.isAuthenticated) {
-            this.props.history.push('/schedule');
+        if (this.props.admin.isAuthenticated) {
+            this.props.history.push('/daznit');
         }
     }
 
@@ -32,10 +32,10 @@ class AdminLogin extends Component {
 
     // a replacement for componentWillReciveProps
     static getDerivedStateFromProps(props, state) {
-        if(props.admin.isAuthenticated) {
-            props.history.push('/schedule');
+        if (props.admin.isAuthenticated) {
+            props.history.push('/daznit');
         }
-        if(props.errors) {
+        if (props.errors) {
             return {
                 errors: props.errors,
             };
@@ -49,39 +49,22 @@ class AdminLogin extends Component {
         });
     }
 
-    onSubmitHandler = async(e) => {
+    onSubmitHandler = async (e) => {
         e.preventDefault();
         const adminData = {
             username: this.state.username,
             password: this.state.password
         }
-     
-        var data = JSON.stringify({
-         ...adminData
-        });
-        
-        var config = {
-          method: 'post',
-          url: baseurl+'/login',
-          headers: { 
-            'Content-Type': 'application/json'
-          },
-          data : data
-        };
-        
-      let response=  await Axios(config)
-      if(response.data.success==true)
-   {  
-    let isAdmin=response.data.isAdmin
-    if(!isAdmin){
-        localStorage.setItem('user',JSON.stringify(response.data.staf))
-    }
-    this.props.loginAdmin(isAdmin)
+        if (adminData.username == 'zerobug' && adminData.password == 'zerobug') {
 
-}
-        
-        
-       
+
+            this.props.loginAdmin(true)
+            window.location.reload()
+
+        }
+
+
+
 
     }
 
@@ -94,19 +77,19 @@ class AdminLogin extends Component {
                 <div className='container-fluid'>
                     <div className="row">
                         <div className="offset-md-3 col-md-6">
-                            <h1 className="text-center my-5 login-title">Admin Login</h1>
+                            <h1 className="text-center my-5 login-title">Hello , Write Your Login</h1>
                             <div className='login-form'>
                                 <form onSubmit={this.onSubmitHandler}>
-                                    
+
                                     {/* Username */}
                                     <div className="form-group">
                                         <div className="input-group">
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text"> <i className="fas fa-user fa-lg"></i> </div>
                                             </div>
-                                            <input type="text" name='username' className={classnames('form-control form-control-lg', {'is-invalid': errors.notFound})} placeholder="Username: admin" onChange={this.onChangeHandler} />
+                                            <input type="text" name='username' className={classnames('form-control form-control-lg', { 'is-invalid': errors.notFound })} placeholder="Username" onChange={this.onChangeHandler} />
                                             <div className="invalid-feedback">
-                                               <strong>{errors.notFound}</strong>
+                                                <strong>{errors.notFound}</strong>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +99,7 @@ class AdminLogin extends Component {
                                             <div className="input-group-prepend">
                                                 <div className="input-group-text"><i className="fas fa-lock fa-lg"></i></div>
                                             </div>
-                                            <input type="password" name='password' className={classnames('form-control form-control-lg', {'is-invalid': errors.passwordNotCorrect})} placeholder="Password: admin" onChange={this.onChangeHandler} />
+                                            <input type="password" name='password' className={classnames('form-control form-control-lg', { 'is-invalid': errors.passwordNotCorrect })} placeholder="Password" onChange={this.onChangeHandler} />
                                             <div className="invalid-feedback">
                                                 <strong>{errors.passwordNotCorrect}</strong>
                                             </div>
