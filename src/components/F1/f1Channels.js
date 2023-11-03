@@ -1,0 +1,72 @@
+export const  channelNames={
+    '1019':{
+    name:"BOT"
+  },
+  '1006':{
+    name:"RUS"
+  },
+  '1007':{
+    name:"SAI"
+  },
+  '1014':{
+    name:"MSC"
+  },
+  '1010':{
+    name:"HAM"
+  },
+  '1012':{
+    name:"OCO"
+  },
+  '1020':{
+    name:"ZHO"
+  },
+  '1023':{
+    name:"ALB"
+  },
+  '1022':{
+    name:"TSU"
+  },
+  '1013':{
+    name:"MAG"
+  },
+  '1017':{
+    name:"STR"
+  },
+  '1008':{
+    name:"LEC"
+  },
+  '1005':{
+    name:"ALO"
+  },
+  '1033':{
+    name:"F1 LV"
+  },
+  '1003':{
+    name:"TRACKER"
+  },
+  '1009':{
+    name:"VER"
+  },
+  '1015':{
+    name:"RIC"
+  },
+  '1016':{
+    name:"NOR"
+  },
+  '1024':{
+    name:"LAT"
+  },
+  '1021':{
+    name:"GAS"
+  },
+  '1011':{
+    name:"PER"
+  },
+  '1004':{
+    name:"DATA"
+  },
+  
+  
+  
+  
+  }
