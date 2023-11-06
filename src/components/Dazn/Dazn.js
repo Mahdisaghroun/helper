@@ -258,7 +258,7 @@ class Dazn extends Component {
                   },
                   data: data
                 };
-                await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                await Axios.post('http://89.38.131.39:3001/curl', {
                   curl: config
                 })
                   .then(async function (response) {
@@ -280,7 +280,7 @@ class Dazn extends Component {
                       },
                       data: data
                     };
-                    await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                    await Axios.post('http://89.38.131.39:3001/curl', {
                 curl: config
               })
                       .then(function (response) {
@@ -378,7 +378,7 @@ class Dazn extends Component {
         },
         data: data
       };
-      await Promise.all( await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+      await Promise.all( await Axios.post('http://89.38.131.39:3001/curl', {
         curl: config
       })
         .then(async function (response) {
@@ -399,7 +399,7 @@ class Dazn extends Component {
             },
             data: data
           };
-            await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+            await Axios.post('http://89.38.131.39:3001/curl', {
             curl: config
           })
             .then(function (response) {
@@ -473,7 +473,7 @@ class Dazn extends Component {
               data: data
             };
             await Promise.all(
-              await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+              await Axios.post('http://89.38.131.39:3001/curl', {
                 curl: config
               })
                 .then(async function (response) {
@@ -494,7 +494,7 @@ class Dazn extends Component {
                     },
                     data: data
                   };
-                    await Axios.post('https://daznkey-neeq-1s9ntyjpp-mahdisaghroun.vercel.app/curl', {
+                    await Axios.post('http://89.38.131.39:3001/curl', {
                     curl: config
                   })
                     .then(function (response) {

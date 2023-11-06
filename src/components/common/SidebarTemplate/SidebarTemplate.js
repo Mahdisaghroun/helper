@@ -367,7 +367,9 @@ function SidebarTemplate(props) {
 
         }}
       />
-      <div id="page-content-wrapper" >
+      <div id="page-content-wrapper" style={{
+        backgroundColor: 'black'
+      }} >
         <nav className="navbar navbar-expand-lg navbar-light bg-transparent border-bottom" >
           <button className="btn btn-light" onClick={minimizeSidebar}>
             {" "}
