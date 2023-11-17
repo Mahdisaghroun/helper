@@ -395,7 +395,7 @@ function SidebarTemplate(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent" >
             <ul className="navbar-nav ml-auto mt-2 mt-lg-0" >
               <li className="nav-item">
-                <div className="nav-link logout" style={{ color: 'white' }}>ZEROBUG DEMO VERSION</div>
+                <div className="nav-link logout" style={{ color: 'white' }}>VERSION 1.0</div>
               </li>
               <li className="nav-item float-right" style={{
                 justifyContent: "center",
@@ -457,7 +457,7 @@ function SidebarTemplate(props) {
             style={{
               minHeight: '100vh',
               position: 'relative',
-              zIndex: 1,
+              zIndex: 0,
             }}
           >
             {props.children}

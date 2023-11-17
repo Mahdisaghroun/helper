@@ -139,9 +139,11 @@ class Dazn extends Component {
        Password: this.props.daznLogin.it.password,
        Platform: "ios",
      }); */
+    let dataLogin = await localStorage.getItem('loginData')
+    let dataLoginParsed = JSON.parse(dataLogin)
     let data = JSON.stringify({
-      "Email": "onlinealways@tutamail.com",
-      "Password": "EasyPassword23@",
+      "Email": dataLoginParsed?.email ?? "onlinealways@tutamail.com",
+      "Password": dataLoginParsed?.password ?? "EasyPassword23@",
       "Platform": "web",
       "DeviceId": "005cc6abf3",
       "ProfilingSessionId": "we6cds1935wvevtmzonel"
@@ -281,8 +283,8 @@ class Dazn extends Component {
                       data: data
                     };
                     await Axios.post('http://89.38.131.39:3001/curl', {
-                curl: config
-              })
+                      curl: config
+                    })
                       .then(function (response) {
                         let parseddata = response.data
                         let key = parseddata.key
@@ -378,7 +380,7 @@ class Dazn extends Component {
         },
         data: data
       };
-      await Promise.all( await Axios.post('http://89.38.131.39:3001/curl', {
+      await Promise.all(await Axios.post('http://89.38.131.39:3001/curl', {
         curl: config
       })
         .then(async function (response) {
@@ -399,7 +401,7 @@ class Dazn extends Component {
             },
             data: data
           };
-            await Axios.post('http://89.38.131.39:3001/curl', {
+          await Axios.post('http://89.38.131.39:3001/curl', {
             curl: config
           })
             .then(function (response) {
@@ -494,7 +496,7 @@ class Dazn extends Component {
                     },
                     data: data
                   };
-                    await Axios.post('http://89.38.131.39:3001/curl', {
+                  await Axios.post('http://89.38.131.39:3001/curl', {
                     curl: config
                   })
                     .then(function (response) {
@@ -823,12 +825,12 @@ class Dazn extends Component {
               SCHEDULE
             </button>
           </div>
-          {/* {this.props?.isAdmin && <button
+          {this.props?.isAdmin && <button
             className="btn btn-warning float-right"
             onClick={() => this.setState({ loginModalState: true })}
           >
             NEW LOGIN
-          </button>} */}
+          </button>}
         </div>
         <div
           class="input-group container"

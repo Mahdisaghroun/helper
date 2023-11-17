@@ -14,7 +14,7 @@ export default function ModalLogin(props) {
   const [loading, setloading] = useState(false);
   const linkRef = useRef();
   const passRef = useRef();
-  const pinRef= useRef()
+  const pinRef = useRef()
   const refreshTokenData = async () => {
     const res = await refreshF1Token();
     if (res.data.success == true) {
@@ -24,35 +24,25 @@ export default function ModalLogin(props) {
   function openModal() {
     setIsOpen(true);
   }
-const saveLogin=()=>{
-    var data = JSON.stringify({
-        "type": "it",
-        "data": {
-          "email": linkRef?.current.value,
-          "password": passRef?.current.value,
-          "pin": pinRef?.current.value
-        }
-      });
-      
-      var config = {
-        method: 'post',
-        url: baseurl+'/adddazn',
-        headers: { 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      Axios(config)
-      .then(function (response) {
+  const saveLogin = () => {
+    var data = {
+      "email": linkRef?.current.value,
+      "password": passRef?.current.value,
+      "pin": pinRef?.current.value ?? ''
+    }
 
-        addToast("Created Successfully", { appearance: "success" });
-        props.onClose()
-      })
-      .catch(function (error) {
-        addToast("Error Occured please try again", { appearance: "error" })
-      });
-}
+
+
+    localStorage.setItem('loginData', JSON.stringify(data))
+
+
+    addToast("Created Successfully", { appearance: "success" });
+    props.onClose()
+    window.location.reload()
+
+
+
+  }
   const changeLink = async () => {
     setloading(true);
     //"bpaoletti88@libero.it"
@@ -61,23 +51,23 @@ const saveLogin=()=>{
       Email: linkRef?.current.value,
       Password: passRef?.current.value,
       Platform: "ios",
-     
+
     });
 
     var config = {
-        method: "post",
-        url: baseurl+"/loginDazn",
-        headers: {
-          Accept: "*/*",
-         
-        
-          "Content-Type": "application/json",
-        
-  
-         
-        },
-        data: data,
-      };
+      method: "post",
+      url: baseurl + "/loginDazn",
+      headers: {
+        Accept: "*/*",
+
+
+        "Content-Type": "application/json",
+
+
+
+      },
+      data: data,
+    };
 
     Axios(config)
       .then(function (response) {
@@ -89,8 +79,8 @@ const saveLogin=()=>{
             "" + response?.data?.AuthToken?.Token
           );
           props.reload(response?.data?.AuthToken?.Token)
-         props.onClose()
-        
+          props.onClose()
+
         }
       })
       .catch(function (error) {
@@ -114,15 +104,21 @@ const saveLogin=()=>{
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      zIndex: 99999,
+      position: 'absolute'
     },
   };
   const ModalLink = () => (
     <Modal
+
       style={customStyles}
       isOpen={modalIsOpen}
       onRequestClose={props.onClose}
     >
-      <form>
+      <form style={{
+        // position: 'absolute',
+        zIndex: 999999
+      }} >
         <div class="form-group">
           <label for="daznusern">Email</label>
           <input
@@ -150,18 +146,18 @@ const saveLogin=()=>{
             placeholder="PIN"
           />
         </div>
-        <button
+        {/*  <button
           type="button"
           class="btn btn-primary"
           onClick={() => changeLink()}
           disabled={loading}
         >
           {loading ? "..." : "Login"}
-        </button>
+        </button> */}
         <button
-        style={{
-            marginLeft:10
-        }}
+          style={{
+            marginLeft: 10
+          }}
           type="button"
           class="btn btn-success"
           onClick={() => saveLogin()}
