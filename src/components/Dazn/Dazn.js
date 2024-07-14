@@ -9,7 +9,7 @@ import {
   setMessage,
   deleteStudent,
 } from "../../actions/studentActions";
-import XMLParser from 'react-xml-parser';
+import XMLParser from "react-xml-parser";
 import { getElevenSportDta } from "../../api/api";
 import { copy } from "../../utils/copy";
 import Dropdown from "react-dropdown";
@@ -113,12 +113,12 @@ class Dazn extends Component {
       },
     };
     let configTopass = {
-      method: 'post',
-      url: this.props.nodeLinks.dazn_it?.key + '/excute',
+      method: "post",
+      url: this.props.nodeLinks.dazn_it?.key + "/excute",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      data: JSON.stringify(configg)
+      data: JSON.stringify(configg),
     };
     return Axios(configg);
   }
@@ -132,50 +132,75 @@ class Dazn extends Component {
     return false;
   }
   login = async () => {
-    const axios = require('axios');
+    const axios = require("axios");
 
     /*  var data = JSON.stringify({
        Email: this.props.daznLogin.it.email,
        Password: this.props.daznLogin.it.password,
        Platform: "ios",
      }); */
-    let dataLogin = await localStorage.getItem('loginData')
-    let dataLoginParsed = JSON.parse(dataLogin)
+    let dataLogin = await localStorage.getItem("loginData");
+    let dataLoginParsed = JSON.parse(dataLogin);
     let data = JSON.stringify({
-      "Email": dataLoginParsed?.email ?? "onlinealways@tutamail.com",
-      "Password": dataLoginParsed?.password ?? "EasyPassword23@",
-      "Platform": "web",
-      "DeviceId": "005cc6abf3",
-      "ProfilingSessionId": "we6cds1935wvevtmzonel"
+      Email: dataLoginParsed?.email ?? "onlinealways@tutamail.com",
+      Password: dataLoginParsed?.password ?? "EasyPassword23@",
+      Platform: "web",
+      DeviceId: "005cc6abf3",
+      ProfilingSessionId: "we6cds1935wvevtmzonel",
     });
     let config = {
-      method: 'post',
+      method: "post",
       maxBodyLength: Infinity,
-      url: 'https://authentication-prod.ar.indazn.com/v5/SignIn',
+      url: "https://authentication-prod.ar.indazn.com/v5/SignIn",
       headers: {
-        'authority': 'authentication-prod.ar.indazn.com',
-        'accept': '*/*',
-        'accept-language': 'fr,en-US;q=0.9,en;q=0.8,fr-FR;q=0.7',
-        'cache-control': 'no-cache',
-        'content-type': 'application/json',
-        'origin': 'https://www.dazn.com',
-        'referer': 'https://www.dazn.com/',
-        'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'cross-site',
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-        'x-dazn-ua': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 signin/4.34.3.55 hyper/0.14.0 (web; production; tn)'
+        authority: "authentication-prod.ar.indazn.com",
+        accept: "*/*",
+        "accept-language": "fr,en-US;q=0.9,en;q=0.8,fr-FR;q=0.7",
+        "cache-control": "no-cache",
+        "content-type": "application/json",
+        origin: "https://www.dazn.com",
+        referer: "https://www.dazn.com/",
+        "sec-ch-ua":
+          '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"macOS"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+        "user-agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+        "x-dazn-ua":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 signin/4.34.3.55 hyper/0.14.0 (web; production; tn)",
       },
-      data: data
+      data: data,
+    };
+    let configg = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: "http://89.38.131.39:5334/login",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Accept-Language": "fr,en-US;q=0.9,en;q=0.8,fr-FR;q=0.7",
+        Connection: "keep-alive",
+        "Content-Type": "application/json;charset=UTF-8",
+        Origin: "https://helper-jhr7-iemqc5s9y-mahdisaghroun.vercel.app",
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+      },
     };
 
-
-
-
-    Axios(config)
+    Axios(configg)
+      .then(function (response) {
+        if (response.data) {
+          console.log("response?.data?.token", response?.data?.token);
+          localStorage.setItem("accessTokenIt", "" + response?.data?.token);
+          this.setState({ token: response?.data?.token });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    /*  Axios(config)
       .then(function (response) {
         if (response.data) {
           localStorage.setItem(
@@ -185,7 +210,9 @@ class Dazn extends Component {
           this.setState({ token: response?.data?.AuthToken?.Token });
         }
       })
-      .catch(function (error) { console.log(error) });
+      .catch(function (error) {
+        console.log(error);
+      }); */
   };
   async componentDidUpdate(previousProps, previousState) {
     if (
@@ -214,7 +241,12 @@ class Dazn extends Component {
         })
       );
       this.setState({ labels: [...ccode] });
-      let arr = this.state.tabId === "LIVE" ? res.data.Tiles?.filter((el, i) => el.IsLinear === false && el.Type === "Live") : res.data.Tiles?.filter((el, i) => el.IsLinear == false)
+      let arr =
+        this.state.tabId === "LIVE"
+          ? res.data.Tiles?.filter(
+              (el, i) => el.IsLinear === false && el.Type === "Live"
+            )
+          : res.data.Tiles?.filter((el, i) => el.IsLinear == false);
       this.setState({ events: arr });
       this.setState({ temp: arr });
       this.setState({ loading: false });
@@ -239,56 +271,56 @@ class Dazn extends Component {
               try {
                 let response = await this.getById(el.AssetId);
                 channels[i].urls = response.data.PlaybackDetails;
-                console.log("hahahahahah", response.data.PlaybackDetails)
-                let d1 = response.data.PlaybackDetails[0].ManifestUrl
-                let xmlData = await Axios.get(d1)
-                let str = xmlData.data.toString()
-                let start = str.indexOf("cenc:default_KID")
-                let str2 = str?.substring(start)
-                let str3 = str2.substring(str2.indexOf('"='), 54)
-                str3 = str3.replace('cenc:default_KID=', "").replace('"', "")
-                channels[i].kid = str3
+                console.log("hahahahahah", response.data.PlaybackDetails);
+                let d1 = response.data.PlaybackDetails[0].ManifestUrl;
+                let xmlData = await Axios.get(d1);
+                let str = xmlData.data.toString();
+                let start = str.indexOf("cenc:default_KID");
+                let str2 = str?.substring(start);
+                let str3 = str2.substring(str2.indexOf('"='), 54);
+                str3 = str3.replace("cenc:default_KID=", "").replace('"', "");
+                channels[i].kid = str3;
                 var data = JSON.stringify({
-                  "link": str3
+                  link: str3,
                 });
                 var config = {
-                  method: 'post',
+                  method: "post",
                   maxBodyLength: Infinity,
-                  url: '1',
+                  url: "1",
                   headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json",
                   },
-                  data: data
+                  data: data,
                 };
-                await Axios.post('http://89.38.131.39:3001/curl', {
-                  curl: config
+                await Axios.post("http://89.38.131.39:3001/curl", {
+                  curl: config,
                 })
                   .then(async function (response) {
-                    let token = localStorage.getItem('accessTokenIt')
+                    let token = localStorage.getItem("accessTokenIt");
 
-                    let p = response.data.pssh.replace('PSSH ', '')
-                    channels[i].pssh = p
+                    let p = response.data.pssh.replace("PSSH ", "");
+                    channels[i].pssh = p;
                     var data = JSON.stringify({
-                      "license": channels[i].urls[0].LaUrl,
-                      "pssh": p,
-                      token: token
+                      license: channels[i].urls[0].LaUrl,
+                      pssh: p,
+                      token: token,
                     });
                     var config = {
-                      method: 'post',
+                      method: "post",
                       maxBodyLength: Infinity,
-                      url: '2',
+                      url: "2",
                       headers: {
-                        'Content-Type': 'application/json'
+                        "Content-Type": "application/json",
                       },
-                      data: data
+                      data: data,
                     };
-                    await Axios.post('http://89.38.131.39:3001/curl', {
-                      curl: config
+                    await Axios.post("http://89.38.131.39:3001/curl", {
+                      curl: config,
                     })
                       .then(function (response) {
-                        let parseddata = response.data
-                        let key = parseddata.key
-                        channels[i].key = key
+                        let parseddata = response.data;
+                        let key = parseddata.key;
+                        channels[i].key = key;
                       })
                       .catch(function (error) {
                         console.log(error);
@@ -324,7 +356,12 @@ class Dazn extends Component {
             this.setState({ temp: arr });
             this.setState({ loading: false });
           } else {
-            let arr = (this.state.tabId === "LIVE" || this.state.tabId === "LIVE_KEY") ? res.data.Tiles?.filter((el, i) => el.IsLinear === false && el.Type === "Live") : res.data.Tiles?.filter((el, i) => el.IsLinear == false)
+            let arr =
+              this.state.tabId === "LIVE" || this.state.tabId === "LIVE_KEY"
+                ? res.data.Tiles?.filter(
+                    (el, i) => el.IsLinear === false && el.Type === "Live"
+                  )
+                : res.data.Tiles?.filter((el, i) => el.IsLinear == false);
             this.setState({ events: arr });
             this.setState({ temp: arr });
             this.setState({ loading: false });
@@ -345,96 +382,91 @@ class Dazn extends Component {
       headers: {},
     };
     let configTopass = {
-      method: 'post',
-      url: this.props.nodeLinks.dazn_it?.key + '/excute',
+      method: "post",
+      url: this.props.nodeLinks.dazn_it?.key + "/excute",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      data: JSON.stringify(config)
+      data: JSON.stringify(config),
     };
     return Axios(config);
   }
   generateKey = async (i) => {
-    let el = this.state.events[i]
+    let el = this.state.events[i];
     try {
       let response = await this.getById(el.AssetId);
       el.urls = response.data.PlaybackDetails;
-      console.log("hahahahahah", response.data.PlaybackDetails)
-      let d1 = response.data.PlaybackDetails[0].ManifestUrl
-      let xmlData = await Axios.get(d1)
-      let str = xmlData.data.toString()
-      let start = str.indexOf("cenc:default_KID")
-      let str2 = str?.substring(start)
-      let str3 = str2.substring(str2.indexOf('"='), 54)
-      str3 = str3.replace('cenc:default_KID=', "").replace('"', "")
-      el.kid = str3
+      console.log("hahahahahah", response.data.PlaybackDetails);
+      let d1 = response.data.PlaybackDetails[0].ManifestUrl;
+      let xmlData = await Axios.get(d1);
+      let str = xmlData.data.toString();
+      let start = str.indexOf("cenc:default_KID");
+      let str2 = str?.substring(start);
+      let str3 = str2.substring(str2.indexOf('"='), 54);
+      str3 = str3.replace("cenc:default_KID=", "").replace('"', "");
+      el.kid = str3;
       var data = JSON.stringify({
-        "link": str3
+        link: str3,
       });
       var config = {
-        method: 'post',
+        method: "post",
         maxBodyLength: Infinity,
-        url: '1',
+        url: "1",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        data: data
+        data: data,
       };
-      await Promise.all(await Axios.post('http://89.38.131.39:3001/curl', {
-        curl: config
-      })
-        .then(async function (response) {
-          let token = localStorage.getItem('accessTokenIt')
-          let p = response.data.pssh.replace('PSSH ', '')
-          el.pssh = p
+      await Promise.all(
+        await Axios.post("http://89.38.131.39:3001/curl", {
+          curl: config,
+        }).then(async function (response) {
+          let token = localStorage.getItem("accessTokenIt");
+          let p = response.data.pssh.replace("PSSH ", "");
+          el.pssh = p;
           var data = JSON.stringify({
-            "license": el.urls[0].LaUrl,
-            "pssh": p,
-            token: token
+            license: el.urls[0].LaUrl,
+            pssh: p,
+            token: token,
           });
           var config = {
-            method: 'post',
+            method: "post",
             maxBodyLength: Infinity,
-            url: '2',
+            url: "2",
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json",
             },
-            data: data
+            data: data,
           };
-          await Axios.post('http://89.38.131.39:3001/curl', {
-            curl: config
+          await Axios.post("http://89.38.131.39:3001/curl", {
+            curl: config,
           })
             .then(function (response) {
-              let parseddata = response.data
-              let key = parseddata.key
-              el.key = key
-              let channels = this.state.e
+              let parseddata = response.data;
+              let key = parseddata.key;
+              el.key = key;
+              let channels = this.state.e;
             })
             .catch(function (error) {
               console.log(error);
             });
         })
+      ).catch(function (error) {
+        console.log(error);
+      });
 
-      )
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      let ch = this.state.events
-      ch[i] = el
-      this.setState({ events: ch })
+      let ch = this.state.events;
+      ch[i] = el;
+      this.setState({ events: ch });
     } catch (error) {
-      await this.login()
+      await this.login();
       console.log(error);
-
     }
-
-
-  }
+  };
   async componentDidMount() {
     try {
       this.setState({ loading: true });
-      await this.login()
+      await this.login();
       const format2 = "YYYY-MM-DD";
       const format3 = "YYYY-MM-DDTHH:mm:ss";
       var date2 = new Date();
@@ -450,70 +482,43 @@ class Dazn extends Component {
       await Promise.all(
         channels.map(async (el, i) => {
           try {
-            let token = localStorage.getItem('accessTokenIt')
-            let response = await this.getById(el.AssetId).catch(err => console.log('not found', err, el.Title, el.AssetId));
+            let token = localStorage.getItem("accessTokenIt");
+            let response = await this.getById(el.AssetId).catch((err) =>
+              console.log("not found", err, el.Title, el.AssetId)
+            );
             channels[i].urls = response.data.PlaybackDetails;
-            console.log("hahahahahah", response.data.PlaybackDetails)
-            let d1 = response.data.PlaybackDetails[0].ManifestUrl
-            let xmlData = await Axios.get(d1)
-            let str = xmlData.data.toString()
-            let start = str.indexOf("cenc:default_KID")
-            let str2 = str?.substring(start)
-            let str3 = str2.substring(str2.indexOf('"='), 54)
-            str3 = str3.replace('cenc:default_KID=', "").replace('"', "")
-            channels[i].kid = str3
+            console.log("hahahahahah", response.data.PlaybackDetails);
+
+            let p = response.data.License.Pssh;
+            //  console.log("Strem v" + i, p);
+            channels[i].pssh = p;
             var data = JSON.stringify({
-              "link": str3
+              license: channels[i].urls[0].LaUrl,
+              pssh: p,
+              token: token,
             });
             var config = {
-              method: 'post',
+              method: "post",
               maxBodyLength: Infinity,
-              url: '1',
+              url: "2",
               headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
               },
-              data: data
+              data: data,
             };
-            await Promise.all(
-              await Axios.post('http://89.38.131.39:3001/curl', {
-                curl: config
+            await Axios.post("http://89.38.131.39:3001/curl", {
+              curl: config,
+            })
+              .then(function (response) {
+                let parseddata = response.data;
+                let key = parseddata.key;
+                channels[i].key = key;
               })
-                .then(async function (response) {
-                  let p = response.data.pssh.replace('PSSH ', '')
-                  console.log("Strem v" + i, p)
-                  channels[i].pssh = p
-                  var data = JSON.stringify({
-                    "license": channels[i].urls[0].LaUrl,
-                    "pssh": p,
-                    token: token
-                  });
-                  var config = {
-                    method: 'post',
-                    maxBodyLength: Infinity,
-                    url: '2',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    data: data
-                  };
-                  await Axios.post('http://89.38.131.39:3001/curl', {
-                    curl: config
-                  })
-                    .then(function (response) {
-                      let parseddata = response.data
-                      let key = parseddata.key
-                      channels[i].key = key
-                    })
-                    .catch(function (error) {
-                      console.log('error ' + error);
-                    });
-                }))
               .catch(function (error) {
-                console.log('error ' + error);
+                console.log("error " + error);
               });
           } catch (error) {
-
-            console.log('error ' + error);
+            console.log("error " + error);
           }
         })
       );
@@ -524,8 +529,10 @@ class Dazn extends Component {
         })
       );
       this.setState({ labels: [...ccode] });
-      let arr = res.data.Tiles?.filter((el, i) => el.IsLinear === false && el.Type === "Live");
-      console.log(arr)
+      let arr = res.data.Tiles?.filter(
+        (el, i) => el.IsLinear === false && el.Type === "Live"
+      );
+      console.log(arr);
       this.setState({ events: arr });
       this.setState({ temp: arr });
       this.setState({ loading: false });
@@ -660,10 +667,15 @@ class Dazn extends Component {
         let toAdd = this.state.tabId === "LIVE_KEY";
         return (
           <tr key={itemData.AssetId}>
-            <td><i class="fa fa-check" style={{
-              color: itemData?.key ? "green" : "red",
-              fontSize: 25
-            }}></i> </td>
+            <td>
+              <i
+                class="fa fa-check"
+                style={{
+                  color: itemData?.key ? "green" : "red",
+                  fontSize: 25,
+                }}
+              ></i>{" "}
+            </td>
             <td>{itemData.Title} </td>
             <td>{itemData.Description}</td>
             <td>{itemData.Type}</td>
@@ -705,7 +717,12 @@ class Dazn extends Component {
                   className="btn btn-secondary btn-sm mr-1"
                   onClick={() =>
                     copy(
-                      itemData?.key ? itemData?.urls[0]?.ManifestUrl + "&decryption_key=" + itemData?.key : itemData?.urls[0]?.ManifestUrl + "&decryption_key=0d6712bf2a84edcc93d001a9613f6fec"
+                      itemData?.key
+                        ? itemData?.urls[0]?.ManifestUrl +
+                            "&decryption_key=" +
+                            itemData?.key
+                        : itemData?.urls[0]?.ManifestUrl +
+                            "&decryption_key=0d6712bf2a84edcc93d001a9613f6fec"
                     )
                   }
                 >
@@ -719,7 +736,12 @@ class Dazn extends Component {
                   className="btn btn-secondary btn-sm mr-1"
                   onClick={() =>
                     copy(
-                      itemData?.key ? itemData?.urls[1]?.ManifestUrl + "&decryption_key=" + itemData?.key : itemData?.urls[1]?.ManifestUrl + "&decryption_key=0d6712bf2a84edcc93d001a9613f6fec"
+                      itemData?.key
+                        ? itemData?.urls[1]?.ManifestUrl +
+                            "&decryption_key=" +
+                            itemData?.key
+                        : itemData?.urls[1]?.ManifestUrl +
+                            "&decryption_key=0d6712bf2a84edcc93d001a9613f6fec"
                     )
                   }
                 >
@@ -733,7 +755,12 @@ class Dazn extends Component {
                   className="btn btn-secondary btn-sm mr-1"
                   onClick={() =>
                     copy(
-                      itemData?.key ? itemData?.urls[2]?.ManifestUrl + "&decryption_key=" + itemData?.key : itemData?.urls[2]?.ManifestUrl + "&decryption_key=0d6712bf2a84edcc93d001a9613f6fec"
+                      itemData?.key
+                        ? itemData?.urls[2]?.ManifestUrl +
+                            "&decryption_key=" +
+                            itemData?.key
+                        : itemData?.urls[2]?.ManifestUrl +
+                            "&decryption_key=0d6712bf2a84edcc93d001a9613f6fec"
                     )
                   }
                 >
@@ -741,7 +768,6 @@ class Dazn extends Component {
                 </button>
               )}
             </td>
-
           </tr>
         );
       });
@@ -749,7 +775,13 @@ class Dazn extends Component {
         <table className="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col" style={{ paddingRight: 50, flexDirection: 'row' }}>  <i class="fa fa-key"></i></th>
+              <th
+                scope="col"
+                style={{ paddingRight: 50, flexDirection: "row" }}
+              >
+                {" "}
+                <i class="fa fa-key"></i>
+              </th>
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Type</th>
@@ -769,7 +801,7 @@ class Dazn extends Component {
     }
     return (
       <SidebarTemplate>
-        { }
+        {}
         {this.state.feedback_msg ? (
           <div
             className={`alert alert-${this.state.feedback_msg.type} alert-dismissible fade show mt-3`}
@@ -786,11 +818,10 @@ class Dazn extends Component {
             </button>
           </div>
         ) : null}
-        { }
-        { }
+        {}
+        {}
         <div className="text-center mt-3">
           <div className="btn-group" role="group">
-
             <button
               type="button"
               className={
@@ -825,12 +856,14 @@ class Dazn extends Component {
               SCHEDULE
             </button>
           </div>
-          {this.props?.isAdmin && <button
-            className="btn btn-warning float-right"
-            onClick={() => this.setState({ loginModalState: true })}
-          >
-            NEW LOGIN
-          </button>}
+          {this.props?.isAdmin && (
+            <button
+              className="btn btn-warning float-right"
+              onClick={() => this.setState({ loginModalState: true })}
+            >
+              NEW LOGIN
+            </button>
+          )}
         </div>
         <div
           class="input-group container"
@@ -878,15 +911,13 @@ class Dazn extends Component {
            </div> */}
         </div>
         {this.state.tabId == "SCHEDULE" && (
-          <div
-          >
-            <div
-            >
+          <div>
+            <div>
               <h3
                 className="date-scroller__month-title"
                 style={{
                   marginTop: 10,
-                  color: 'white'
+                  color: "white",
                 }}
               >
                 {slickMonth.charAt(0).toUpperCase() + slickMonth.substring(1)}
@@ -919,14 +950,20 @@ class Dazn extends Component {
                                   : "transparent",
                             }}
                           >
-                            <span className="date-tile__day-of-the-month" style={{
-                              color: 'white'
-                            }}>
+                            <span
+                              className="date-tile__day-of-the-month"
+                              style={{
+                                color: "white",
+                              }}
+                            >
                               {element.date}
                             </span>
-                            <span className="date-tile__day-of-the-week" style={{
-                              color: 'white'
-                            }} >
+                            <span
+                              className="date-tile__day-of-the-week"
+                              style={{
+                                color: "white",
+                              }}
+                            >
                               {element.weekDay}
                             </span>
                           </section>
@@ -947,7 +984,7 @@ class Dazn extends Component {
               textAlign: "center",
               margin: 20,
               marginTop: 50,
-              color: 'red'
+              color: "red",
             }}
           >
             You are not connected ! Please Refresh Your Tab
@@ -973,7 +1010,7 @@ Dazn.propTypes = {
 const mapStateToProps = (state) => ({
   student: state.student,
   message: state.message,
-  isAdmin: state.admin.isAdmin
+  isAdmin: state.admin.isAdmin,
 });
 export default connect(mapStateToProps, {
   getStudents,

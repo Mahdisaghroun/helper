@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logoutAdmin } from "../../../actions/adminActions";
 import { useEffect } from "react";
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from "react-router-dom";
 import Axios from "axios";
 
 function SidebarTemplate(props) {
@@ -70,9 +70,13 @@ function SidebarTemplate(props) {
   return (
     <div className={classnames("d-flex", { toggled: toggled })} id="wrapper">
       {/*  Sidebar */}
-      <div className=" border-right" id="sidebar-wrapper" style={{
-        backgroundColor: "#000000"
-      }}>
+      <div
+        className=" border-right"
+        id="sidebar-wrapper"
+        style={{
+          backgroundColor: "#000000",
+        }}
+      >
         <div className="sidebar-heading text-center text-light ">
           <img
             src="logo.png"
@@ -84,6 +88,16 @@ function SidebarTemplate(props) {
           <small>{admin.national_id}</small>
         </div>
         <div className="list-group list-group-flush">
+        {true && (
+            <Link
+              to="/lnp"
+              className={`list-group-item list-group-item-action bg-${
+                currentPath == "/lnp" ? "blue" : "dark"
+              } text-light`}
+            >
+              <i className="fas fa-tv"></i> LNP BASKET A2/B
+            </Link>
+          )}
           {/*    {(props.admin.isAdmin || user?.privillege?.indexOf("DASHBOARD") > -1) && <Link
             to="/dashboard"
             className={`list-group-item list-group-item-action bg-${currentPath == "/dashboard" ? "primary" : "dark"
@@ -131,13 +145,19 @@ function SidebarTemplate(props) {
               </Link>
             )} */}
 
-          {props.admin?.isAuthenticated ? <img src="https://i.pinimg.com/236x/39/b0/42/39b042e14a94642863071fb3099e1be4.jpg" style={{
-            height: '100vh',
-            objectFit: 'cover'
-
-          }} height={'100%'} /> : <Redirect to='/' ></Redirect>
-          }
-
+          {props.admin?.isAuthenticated ? (
+            <img
+              src="https://i.pinimg.com/236x/39/b0/42/39b042e14a94642863071fb3099e1be4.jpg"
+              style={{
+                height: "100vh",
+                objectFit: "cover",
+              }}
+              height={"100%"}
+            />
+          ) : (
+            <Redirect to="/"></Redirect>
+          )}
+          
           {/* {(props.admin.isAdmin ||
             user?.privillege?.indexOf("DAZN DE") > -1) && (
               <Link
@@ -186,6 +206,7 @@ function SidebarTemplate(props) {
                   : " F1 PASS TV"}
               </Link>
             )}
+            *
           {(props.admin.isAdmin ||
             user?.privillege?.indexOf("LNP BASKET A2/B") > -1) && (
               <Link
@@ -344,9 +365,7 @@ function SidebarTemplate(props) {
               </Link>
             </div>
           )} */}
-
         </div>
-
       </div>
       {/*  /#sidebar-wrapper */}
 
@@ -354,23 +373,26 @@ function SidebarTemplate(props) {
       <div
         className="background-image"
         style={{
-          backgroundSize: 'contain',
-          backgroundImage: 'url("https://images.unsplash.com/photo-1519575706483-221027bfbb31?auto=format&fit=crop&q=80&w=2071&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
-          position: 'absolute',
+          backgroundSize: "contain",
+          backgroundImage:
+            'url("https://images.unsplash.com/photo-1519575706483-221027bfbb31?auto=format&fit=crop&q=80&w=2071&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
+          position: "absolute",
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
+          width: "100%",
+          height: "100%",
           opacity: 0.8, // Adjust the opacity to control the blur effect
-          filter: 'blur(5px)', // Apply a blur to the background
+          filter: "blur(5px)", // Apply a blur to the background
           zIndex: -1,
-
         }}
       />
-      <div id="page-content-wrapper" style={{
-        backgroundColor: 'black'
-      }} >
-        <nav className="navbar navbar-expand-lg navbar-light bg-transparent border-bottom" >
+      <div
+        id="page-content-wrapper"
+        style={{
+          backgroundColor: "black",
+        }}
+      >
+        <nav className="navbar navbar-expand-lg navbar-light bg-transparent border-bottom">
           <button className="btn btn-light" onClick={minimizeSidebar}>
             {" "}
             {toggled ? (
@@ -392,25 +414,28 @@ function SidebarTemplate(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent" >
-            <ul className="navbar-nav ml-auto mt-2 mt-lg-0" >
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
               <li className="nav-item">
-                <div className="nav-link logout" style={{ color: 'white' }}>VERSION 1.0</div>
+                <div className="nav-link logout" style={{ color: "white" }}>
+                  VERSION 1.0
+                </div>
               </li>
-              <li className="nav-item float-right" style={{
-                justifyContent: "center",
-                alignContent: "center",
-                //backgroundColor:"red",
-                alignItems: "center",
-                display: "flex",
-
-              }}>
+              <li
+                className="nav-item float-right"
+                style={{
+                  justifyContent: "center",
+                  alignContent: "center",
+                  //backgroundColor:"red",
+                  alignItems: "center",
+                  display: "flex",
+                }}
+              >
                 <div>
                   <span
                     class="badge badge-light "
                     style={{
                       marginLeft: 40,
-
                     }}
                   >
                     {ipInfo?.ip}
@@ -439,10 +464,14 @@ function SidebarTemplate(props) {
             </ul>
             <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
               <li className="nav-item">
-                <div style={{ color: 'white' }} className="nav-link logout" onClick={() => {
-                  localStorage.clear()
-                  window.location.reload()
-                }}>
+                <div
+                  style={{ color: "white" }}
+                  className="nav-link logout"
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                >
                   Logout
                 </div>
               </li>
@@ -450,13 +479,15 @@ function SidebarTemplate(props) {
           </div>
         </nav>
 
-        <div className="container-fluid sidebar-template" style={{ position: 'relative' }}>
-
+        <div
+          className="container-fluid sidebar-template"
+          style={{ position: "relative" }}
+        >
           <div
             className="content"
             style={{
-              minHeight: '100vh',
-              position: 'relative',
+              minHeight: "100vh",
+              position: "relative",
               zIndex: 0,
             }}
           >

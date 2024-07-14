@@ -80,8 +80,8 @@ function App() {
     Axios(config)
       .then(async function (response) {
         console.log(response.data);
-        let staff = response.data.staffs
-        let user = "user"
+        let staff = response.data.staffs;
+        let user = "user";
 
         setData(response.data);
         localStorage.setItem(
@@ -121,12 +121,10 @@ function App() {
         }
       }
     }
-   // fetching()
+    // fetching()
     // login()
   }, []);
-  useEffect(() => {
-   
-  }, []);
+  useEffect(() => {}, []);
   useEffect(() => {
     async function fet() {
       let ipres = await Axios.get("http://ipwho.is/");
@@ -153,6 +151,9 @@ function App() {
                 ></Dazn>
               )}
             />
+            <Switch>
+              <Route exact path={"/lnp"} component={LNP} />
+            </Switch>
           </Switch>
 
           {/*  <Switch>
