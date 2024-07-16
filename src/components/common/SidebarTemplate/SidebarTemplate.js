@@ -88,16 +88,7 @@ function SidebarTemplate(props) {
           <small>{admin.national_id}</small>
         </div>
         <div className="list-group list-group-flush">
-        {true && (
-            <Link
-              to="/lnp"
-              className={`list-group-item list-group-item-action bg-${
-                currentPath == "/lnp" ? "warning" : "transparent"
-              } text-light`}
-            >
-              <i className="fas fa-tv"></i> LNP BASKET A2/B
-            </Link>
-          )}
+        
           {true && (
             <Link
               to="/daznit"
@@ -106,6 +97,16 @@ function SidebarTemplate(props) {
               } text-light`}
             >
               <i className="fas fa-tv"></i> DAZN 
+            </Link>
+          )}
+          {true && (
+            <Link
+              to="/lnp"
+              className={`list-group-item list-group-item-action bg-${
+                currentPath == "/lnp" ? "warning" : "transparent"
+              } text-light`}
+            >
+              <i className="fas fa-tv"></i> LNP BASKET A2/B
             </Link>
           )}
           {/*    {(props.admin.isAdmin || user?.privillege?.indexOf("DASHBOARD") > -1) && <Link
