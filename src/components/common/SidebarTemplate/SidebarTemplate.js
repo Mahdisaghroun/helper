@@ -92,10 +92,20 @@ function SidebarTemplate(props) {
             <Link
               to="/lnp"
               className={`list-group-item list-group-item-action bg-${
-                currentPath == "/lnp" ? "blue" : "dark"
+                currentPath == "/lnp" ? "warning" : "transparent"
               } text-light`}
             >
               <i className="fas fa-tv"></i> LNP BASKET A2/B
+            </Link>
+          )}
+          {true && (
+            <Link
+              to="/daznit"
+              className={`list-group-item list-group-item-action bg-${
+                currentPath == "/daznit" ? "warning" : "transparent"
+              } text-light`}
+            >
+              <i className="fas fa-tv"></i> DAZN 
             </Link>
           )}
           {/*    {(props.admin.isAdmin || user?.privillege?.indexOf("DASHBOARD") > -1) && <Link
